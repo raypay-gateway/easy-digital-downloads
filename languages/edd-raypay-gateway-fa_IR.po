@@ -1,0 +1,121 @@
+# Copyright (C) 2020 RayPay
+# This file is distributed under the same license as the RayPay for Easy Digital Downloads (EDD) plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: RayPay for Easy Digital Downloads (EDD) 2.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/edd-raypay-"
+"gateway\n"
+"POT-Creation-Date: 2019-05-08T11:21:04+00:00\n"
+"PO-Revision-Date: 2021-05-09 11:56+0430\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Domain: edd-raypay-gateway\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+
+#. Plugin Name of the plugin
+msgid "RayPay for Easy Digital Downloads (EDD)"
+msgstr "درگاه پرداخت رای پی"
+
+#. Description of the plugin
+msgid ""
+"<a href=\"https://raypay.ir\">RayPay</a> secure payment gateway for Easy "
+"Digital Downloads (EDD)"
+msgstr ""
+"درگاه پرداخت امن <a href=\"https://raypay.ir\">RayPay</a> برای افزونه EDD"
+
+#. Author of the plugin
+#: includes/edd-raypay-gateway.php:16
+msgid "RayPay"
+msgstr "رای پی"
+
+#. Author URI of the plugin
+msgid "https://raypay.ir"
+msgstr ""
+
+#: includes/edd-raypay-gateway.php:17 includes/edd-raypay-gateway.php:58
+msgid "RayPay payment gateway"
+msgstr "درگاه پرداخت رای پی"
+
+#: includes/edd-raypay-gateway.php:241
+msgid "User ID"
+msgstr "شناسه کاربری"
+
+#: includes/edd-raypay-gateway.php:65
+msgid "You can receive your User ID by going to your RayPay panel"
+msgstr "شما میتوانید شناسه کاربری خود را از پنل رای پی دریافت کنید"
+
+#: includes/edd-raypay-gateway.php:247
+msgid "Acceptor Code"
+msgstr "کد پذیرنده"
+
+#: includes/edd-raypay-gateway.php:65
+msgid "You can receive your Acceptor Code by going to your RayPay panel"
+msgstr "شما میتوانید کد پذیرنده خود را از پنل رای پی دریافت کنید"
+
+#: includes/edd-raypay-gateway.php:121
+msgid "Order number #"
+msgstr "شماره سفارش#"
+
+#: includes/edd-raypay-gateway.php:125
+msgid "Selected currency is not supported."
+msgstr "واحد پول فوق پشتیبانی نمیشود."
+
+#: includes/edd-raypay-gateway.php:182
+msgid "Redirecting to the payment gateway."
+msgstr "در حال هدایت به درگاه رای پی."
+
+#: includes/edd-raypay-gateway.php:225 includes/edd-raypay-gateway.php:229
+msgid "The information sent is not correct."
+msgstr "اطلاعات فرستاده شده صحیح نمی باشد."
+
+msgid "An error occurred while creating the transaction."
+msgstr "خطایی هنگام ایجاد درگاه رخ داده است."
+
+msgid "RayPay Invoice ID:"
+msgstr "شناسه ارجاع بانکی رای پی :"
+
+msgid "RayPay Transaction State:"
+msgstr "وضعیت پرداخت رای پی :"
+
+msgid "RayPay Transaction Amount:"
+msgstr "مبلغ پرداخت شده از درگاه رای پی :"
+
+#: includes/edd-raypay-gateway.php:387
+msgid "Payment has not been made."
+msgstr "پرداخت ایجاد نشده است."
+
+#: includes/edd-raypay-gateway.php:390
+msgid "Payment has been unsuccessful."
+msgstr "پرداخت ناموفق بوده است."
+
+#: includes/edd-raypay-gateway.php:393
+msgid "An error occurred."
+msgstr "خطایی رخ داده است."
+
+#: includes/edd-raypay-gateway.php:396
+msgid "Payment has been blocked."
+msgstr ""
+
+#: includes/edd-raypay-gateway.php:405
+msgid "Pending verification."
+msgstr "در حال استعلام."
+
+#: includes/edd-raypay-gateway.php:405
+msgid "An error occurred while verifying the transaction."
+msgstr "خطایی هنگام استعلام تراکنش رخ داده است."
+
+#: includes/edd-raypay-gateway.php:408
+msgid "Payment has been verified."
+msgstr "پرداخت با موفقیت انجام شد."
+
+#: includes/edd-raypay-gateway.php:411
+msgid "Payment has already been verified."
+msgstr "استعلام پرداخت قبلا انجام شده است."
+
+#~ msgid "Unexpected error. code:"
+#~ msgstr "خطا در پرداخت:"
