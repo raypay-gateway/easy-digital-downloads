@@ -28,5 +28,5 @@ After creating a web service on https://raypay.ir and getting an UserID and Acce
 After that, if a customer is going to purchase a downloadable product which is created by Easy Digital Downloads, The RayPay payment gateway will appear and she can pay with it.
 
 == Changelog ==
-= 1.0, September 30, 2018 =
+= 1.0, May 6, 2021 =
 * First Release

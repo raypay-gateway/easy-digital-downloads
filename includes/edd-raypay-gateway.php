@@ -17,8 +17,8 @@ class EDD_RayPay_Gateway
   public function __construct()
   {
     $this->keyname = 'raypay';
-    $this->payment_endpoint = 'http://185.165.118.211:14000/raypay/api/v1/Payment/getPaymentTokenWithUserID';
-    $this->verify_endpoint = 'http://185.165.118.211:14000/raypay/api/v1/Payment/checkInvoice';
+    $this->payment_endpoint = 'https://api.raypay.ir/raypay/api/v1/Payment/getPaymentTokenWithUserID';
+    $this->verify_endpoint = 'https://api.raypay.ir/raypay/api/v1/Payment/checkInvoice';
     add_filter('edd_payment_gateways', array($this, 'add'));
     add_action($this->format('edd_{key}_cc_form'), array($this, 'cc_form'));
     add_action($this->format('edd_gateway_{key}'), array($this, 'process'));
