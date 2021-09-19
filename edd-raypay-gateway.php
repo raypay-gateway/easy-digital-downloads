@@ -6,7 +6,6 @@
  * Version: 1.0
  * Author URI: https://saminray.com
  * Author Email: info@saminray.com
- *
  * Text Domain: edd-raypay-gateway
  * Domain Path: languages
  */

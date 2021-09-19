@@ -17,8 +17,8 @@ class EDD_RayPay_Gateway
   public function __construct()
   {
     $this->keyname = 'raypay';
-    $this->payment_endpoint = 'https://api.raypay.ir/raypay/api/v1/Payment/getPaymentTokenWithUserID';
-    $this->verify_endpoint = 'https://api.raypay.ir/raypay/api/v1/Payment/checkInvoice';
+    $this->payment_endpoint = 'https://api.raypay.ir/raypay/api/v1/Payment/pay';
+    $this->verify_endpoint = 'https://api.raypay.ir/raypay/api/v1/Payment/verify';
     add_filter('edd_payment_gateways', array($this, 'add'));
     add_action($this->format('edd_{key}_cc_form'), array($this, 'cc_form'));
     add_action($this->format('edd_gateway_{key}'), array($this, 'process'));
@@ -63,11 +63,11 @@ class EDD_RayPay_Gateway
     $payment_id = $this->insert_payment($purchase_data);
     if ($payment_id) {
       $user_id = empty($edd_options['raypay_user_id']) ? '' : $edd_options['raypay_user_id'];
-      $acceptor_code = empty($edd_options['raypay_acceptor_code']) ? '' : $edd_options['raypay_acceptor_code'];
+      $marketing_id = empty($edd_options['raypay_marketing_id']) ? '' : $edd_options['raypay_marketing_id'];
+      $sandbox = !empty($edd_options['raypay_sandbox']);
       $invoice_id = round(microtime(true)*1000) ;
       $customer_name = $purchase_data['user_info']['first_name'] . ' ' . $purchase_data['user_info']['last_name'];
       $callback = add_query_arg(array('verify_' . $this->keyname => '1', 'order_id' => $payment_id), get_permalink($edd_options['success_page']));
-      $callback .= "&";
       $email = $purchase_data['user_info']['email'];
       $amount = $this->raypay_edd_get_amount(intval($purchase_data['price']), edd_get_currency());
 
@@ -87,9 +87,10 @@ class EDD_RayPay_Gateway
             'userID' => $user_id,
             'redirectUrl' => $callback,
             'factorNumber' => strval($payment_id),
-            'acceptorCode' => $acceptor_code,
+            'marketingID' => $marketing_id,
             'email' => $email,
             'fullName' => $customer_name,
+            'enableSandBox' => $sandbox,
         );
 
         $headers = array(
@@ -101,7 +102,6 @@ class EDD_RayPay_Gateway
             'headers' => $headers,
             'timeout' => 15,
         );
-
 
         $response = $this->raypay_edd_call_gateway_endpoint($this->payment_endpoint, $args);
       if (is_wp_error($response)) {
@@ -128,23 +128,20 @@ class EDD_RayPay_Gateway
         return FALSE;
       }
 
-        $access_token = $result->Data->Accesstoken;
-        $terminal_id = $result->Data->TerminalID;
+        $token = $result->Data;
 
-      // Saves accessToken and TerminalID
+      // Saves token
 
       edd_insert_payment_note($payment_id, __('Redirecting to the payment gateway.', 'edd-raypay-gateway'));
 
-      edd_update_payment_meta($payment_id, '_raypay_edd_access_token', $access_token);
-      edd_update_payment_meta($payment_id, '_raypay_edd_terminal_id', $terminal_id);
+      edd_update_payment_meta($payment_id, '_raypay_edd_token', $token);
       edd_update_payment_meta($payment_id, '_raypay_edd_invoice_id', $invoice_id);
 
         // Set remote status of the transaction to 1 as it's primary value.
         edd_update_payment_meta($payment_id, '_raypay_edd_transaction_status',1);
 
-        $this->edd_raypay_send_data_shaparak($access_token , $terminal_id);
-        return FALSE;
-
+        $link='https://my.raypay.ir/ipg?token=' . $token;
+        wp_redirect($link);
 
     } else {
       $message = __("An error occurred.", 'edd-raypay-gateway');
@@ -180,24 +177,18 @@ class EDD_RayPay_Gateway
     }
 
       $invoice_id = edd_get_payment_meta($order_id, '_raypay_edd_invoice_id', TRUE);
-      $verify_url = add_query_arg('pInvoiceID', $invoice_id, $this->verify_endpoint);
-
-
-      $data = array(
-          'order_id' => $order_id,
-      );
 
       $headers = array(
           'Content-Type' => 'application/json',
       );
 
       $args = array(
-          'body' => json_encode($data),
+          'body' => json_encode($_POST),
           'headers' => $headers,
           'timeout' => 15,
       );
 
-      $response = $this->raypay_edd_call_gateway_endpoint($verify_url, $args);
+      $response = $this->raypay_edd_call_gateway_endpoint($this->verify_endpoint, $args);
 
       if (is_wp_error($response)) {
         $note = $response->get_error_message();
@@ -225,8 +216,9 @@ class EDD_RayPay_Gateway
         return FALSE;
       }
 
-      $state = $result->Data->State;
+      $state = $result->Data->Status;
       $verify_order_id = $result->Data->FactorNumber;
+      $verify_invoice_id = $result->Data->InvoiceID;
       $verify_amount = $result->Data->Amount;
 
       if ($state === 1 ){
@@ -237,9 +229,8 @@ class EDD_RayPay_Gateway
 
       update_post_meta($payment->ID, 'raypay_factor_number', $verify_order_id);
       update_post_meta($payment->ID, 'raypay_transaction_amount', $verify_amount);
-      update_post_meta($payment->ID, 'raypay_factor_number', $verify_order_id);
 
-      edd_insert_payment_note($payment->ID, __('RayPay Invoice ID:', 'edd-raypay-gateway') . $invoice_id);
+      edd_insert_payment_note($payment->ID, __('RayPay Invoice ID:', 'edd-raypay-gateway') . $verify_invoice_id);
       edd_insert_payment_note($payment->ID, __('RayPay Transaction State:', 'edd-raypay-gateway') . $state_description);
       edd_insert_payment_note($payment->ID, __('RayPay Transaction Amount:', 'edd-raypay-gateway') . $verify_amount);
 
@@ -259,10 +250,10 @@ class EDD_RayPay_Gateway
         edd_insert_payment_note($payment->ID, $message);
         edd_set_error('raypay_connect_error', $message);
         edd_update_payment_status($payment->ID, 'failed');
-        edd_send_back_to_checkout();
-        //wp_redirect( get_permalink($edd_options['failure_page']) );
-        //exit;
-        return FALSE;
+        wp_redirect( get_permalink( $edd_options['failure_page'] ) );
+        exit;
+        //edd_send_back_to_checkout();
+        //return FALSE;
       }
   }
 
@@ -288,13 +279,20 @@ class EDD_RayPay_Gateway
             'desc' => __('You can receive your User ID by going to your RayPay panel', 'edd-raypay-gateway'),
             'default' => '20064',
         ),
-        $this->keyname . '_acceptor_code' => array(
-            'id' => $this->keyname . '_acceptor_code',
-            'name' => __('Acceptor Code', 'edd-raypay-gateway'),
+        $this->keyname . '_marketing_id' => array(
+            'id' => $this->keyname . '_marketing_id',
+            'name' => __('Marketing ID', 'edd-raypay-gateway'),
             'type' => 'text',
             'size' => 'regular',
-            'desc' => __('You can receive your Acceptor Code by going to your RayPay panel', 'edd-raypay-gateway'),
+            'desc' => __('You can receive your Marketing ID by going to your RayPay panel', 'edd-raypay-gateway'),
             'default' => '220000000003751',
+        ),
+        $this->keyname . '_sandbox' => array(
+            'id' => $this->keyname . '_sandbox',
+            'name' => __('Sandbox', 'edd-raypay-gateway'),
+            'type' => 'checkbox',
+            'default' => 0,
+            'desc' => __('If you check this option, the gateway will work in Test (Sandbox) mode.', 'edd-raypay-gateway'),
         ),
     ));
   }
@@ -406,13 +404,6 @@ class EDD_RayPay_Gateway
     }
   }
 
-    public function edd_raypay_send_data_shaparak($access_token , $terminal_id){
-        echo '<form name="frmRayPayPayment" method="post" action=" https://mabna.shaparak.ir:8080/Pay ">';
-        echo '<input type="hidden" name="TerminalID" value="' . $terminal_id . '" />';
-        echo '<input type="hidden" name="token" value="' . $access_token . '" />';
-        echo '<input class="submit" type="submit" value="پرداخت" /></form>';
-        echo '<script>document.frmRayPayPayment.submit();</script>';
-    }
 
 
 

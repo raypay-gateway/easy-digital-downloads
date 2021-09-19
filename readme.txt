@@ -18,15 +18,15 @@ RayPay provides some payment services and this plugin enables the RayPay's payme
 
 == Installation ==
 
-After creating a web service on https://raypay.ir and getting an UserID and AcceptorCode, follow this instruction:
+After creating a web service on https://raypay.ir and getting an UserID and MarketingID, follow this instruction:
 
 1. Activate plugin RayPay for Easy Digital Downloads.
 2. Go to Downloads > Settings > Payment Gateways.
 3. Check "RayPay" option in the Payment Gateways section.
-4. Enter your UserID and AcceptorCode in "RayPay payment gateway" section.
+4. Enter your UserID and MarketingID in "RayPay payment gateway" section.
 
 After that, if a customer is going to purchase a downloadable product which is created by Easy Digital Downloads, The RayPay payment gateway will appear and she can pay with it.
 
 == Changelog ==
-= 1.0, May 6, 2021 =
+= 1.0, May 10, 2021 =
 * First Release

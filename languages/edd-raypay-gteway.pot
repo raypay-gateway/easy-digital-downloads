@@ -3,127 +3,128 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: RayPay for Easy Digital Downloads (EDD) 2.1.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/edd-raypay-"
-"gateway\n"
-"POT-Creation-Date: 2019-05-08T11:21:04+00:00\n"
-"PO-Revision-Date: 2021-09-19 13:17+0430\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: fa_IR\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/edd-raypay-gateway\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"POT-Creation-Date: 2019-05-08T11:21:04+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.2.0\n"
 "X-Domain: edd-raypay-gateway\n"
-"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
 
 #. Plugin Name of the plugin
 msgid "RayPay for Easy Digital Downloads (EDD)"
-msgstr "درگاه پرداخت رای پی"
+msgstr ""
 
 #. Description of the plugin
-msgid ""
-"<a href=\"https://raypay.ir\">RayPay</a> secure payment gateway for Easy "
-"Digital Downloads (EDD)"
+msgid "<a href=\"https://raypay.ir\">RayPay</a> secure payment gateway for Easy Digital Downloads (EDD)"
 msgstr ""
-"درگاه پرداخت امن <a href=\"https://raypay.ir\">RayPay</a> برای افزونه EDD"
 
 #. Author of the plugin
 #: includes/edd-raypay-gateway.php:16
 msgid "RayPay"
-msgstr "رای پی"
+msgstr ""
 
 #. Author URI of the plugin
 msgid "https://raypay.ir"
 msgstr ""
 
-#: includes/edd-raypay-gateway.php:17 includes/edd-raypay-gateway.php:58
+#: includes/edd-raypay-gateway.php:17
+#: includes/edd-raypay-gateway.php:58
 msgid "RayPay payment gateway"
-msgstr "درگاه پرداخت رای پی"
+msgstr ""
 
 #: includes/edd-raypay-gateway.php:241
 msgid "User ID"
-msgstr "شناسه کاربری"
+msgstr ""
 
 #: includes/edd-raypay-gateway.php:65
 msgid "You can receive your User ID by going to your RayPay panel"
-msgstr "شما میتوانید شناسه کاربری خود را از پنل رای پی دریافت کنید"
+msgstr ""
 
 #: includes/edd-raypay-gateway.php:247
 msgid "Marketing ID"
-msgstr "شناسه کسب و کار"
+msgstr ""
+
 
 #: includes/edd-raypay-gateway.php:65
 msgid "You can receive your Marketing ID by going to your RayPay panel"
-msgstr "شما میتوانید شناسه کسب و کار خود را از پنل رای پی دریافت کنید"
+msgstr ""
+
 
 #: includes/edd-raypay-gateway.php:247
 msgid "Sandbox"
-msgstr "فعالسازی SandBox"
+msgstr ""
+
 
 #: includes/edd-raypay-gateway.php:65
 msgid "If you check this option, the gateway will work in Test (Sandbox) mode."
-msgstr "با انتخاب این گزینه، پرداخت در محیط تست رای پی انجام می گیرد."
+msgstr ""
+
+
 
 #: includes/edd-raypay-gateway.php:121
 msgid "Order number #"
-msgstr "شماره سفارش#"
+msgstr ""
 
 #: includes/edd-raypay-gateway.php:125
 msgid "Selected currency is not supported."
-msgstr "واحد پول فوق پشتیبانی نمیشود."
+msgstr ""
+
 
 #: includes/edd-raypay-gateway.php:182
 msgid "Redirecting to the payment gateway."
-msgstr "در حال هدایت به درگاه رای پی."
+msgstr ""
 
-#: includes/edd-raypay-gateway.php:225 includes/edd-raypay-gateway.php:229
+#: includes/edd-raypay-gateway.php:225
+#: includes/edd-raypay-gateway.php:229
 msgid "The information sent is not correct."
-msgstr "اطلاعات فرستاده شده صحیح نمی باشد."
+msgstr ""
 
 msgid "An error occurred while creating the transaction."
-msgstr "خطایی هنگام ایجاد درگاه رخ داده است."
+msgstr ""
+
 
 msgid "RayPay Invoice ID:"
-msgstr "شناسه ارجاع بانکی رای پی :"
+msgstr ""
 
 msgid "RayPay Transaction State:"
-msgstr "وضعیت پرداخت رای پی :"
+msgstr ""
 
 msgid "RayPay Transaction Amount:"
-msgstr "مبلغ پرداخت شده از درگاه رای پی :"
+msgstr ""
 
 #: includes/edd-raypay-gateway.php:387
 msgid "Payment has not been made."
-msgstr "پرداخت ایجاد نشده است."
+msgstr ""
 
 #: includes/edd-raypay-gateway.php:390
 msgid "Payment has been unsuccessful."
-msgstr "پرداخت ناموفق بوده است."
+msgstr ""
 
 #: includes/edd-raypay-gateway.php:393
 msgid "An error occurred."
-msgstr "خطایی رخ داده است."
+msgstr ""
 
 #: includes/edd-raypay-gateway.php:396
 msgid "Payment has been blocked."
 msgstr ""
 
+
 #: includes/edd-raypay-gateway.php:405
 msgid "Pending verification."
-msgstr "در حال استعلام."
+msgstr ""
 
 #: includes/edd-raypay-gateway.php:405
 msgid "An error occurred while verifying the transaction."
-msgstr "خطایی هنگام استعلام تراکنش رخ داده است."
+msgstr ""
 
 #: includes/edd-raypay-gateway.php:408
 msgid "Payment has been verified."
-msgstr "پرداخت با موفقیت انجام شد."
+msgstr ""
 
 #: includes/edd-raypay-gateway.php:411
 msgid "Payment has already been verified."
-msgstr "استعلام پرداخت قبلا انجام شده است."
-
-#~ msgid "Unexpected error. code:"
-#~ msgstr "خطا در پرداخت:"
+msgstr ""
